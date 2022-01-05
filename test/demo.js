@@ -95,17 +95,39 @@ const data = [
 
 const unique = ()=> {
   let uniqueAgents = [... new Set (data.map(agent=>agent.agent_id))];
-  let newObjectArray = data.map((a)=>{
-    return({name: a.first_name, agent_id: a.agent_id, email: a.email})
-  });
-  let newObject=uniqueAgents.map((agent)=>{
-    let agentProperties = data.filter((p)=>{
-      return (p.agent_id == agent.agent_id)
-    })
-    return({agent_name: agent.name, properties: agentProperties})
-  });
-  return uniqueAgents;
-}
+  let x = uniqueAgents.map(id =>{
+    let properties = data.filter(d=>d.agent_id === id)
+  })
+
+  let	ids = data.map( t => t.agent_id)
+  let uniqueIds = [... new Set(ids)]
+
+  let normailizedData = uniqueIds.map( id =>{
+  let properties =  data.filter( d=> d.agent_id === id)
+  let filterProperties = properties.map(p=>{
+      return {key: p.id, sq_ft: p.sq_ft,price: p.price, beds:p.beds, baths:p.baths, city: p.city, zip:p.zip, street:p.street}
+  })
+    return {
+        name:  properties[0].first_name + ' ' + properties[0].last_name,
+        email:  properties[0].email,
+        properties: filterProperties
+
+    }
+  })
+return normailizedData
+
+
+//   let newObjectArray = data.map((a)=>{
+//     return({name: a.first_name, agent_id: a.agent_id, email: a.email})
+//   });
+//   let newObject=uniqueAgents.map((agent)=>{
+//     let agentProperties = data.filter((p)=>{
+//       return (p.agent_id == agent.agent_id)
+//     })
+//     return({agent_name: agent.name, properties: agentProperties})
+//   });
+//   return uniqueAgents;
+// }
 
 let newArray = unique()
 
