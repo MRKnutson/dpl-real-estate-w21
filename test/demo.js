@@ -1,4 +1,4 @@
-const data = [
+const apdata = [
   {
       "id": 1,
       "price": 1405737,
@@ -93,28 +93,35 @@ const data = [
 //   properties: []
 // ]}
 
-const unique = ()=> {
+const unique = (data)=> {
   let uniqueAgents = [... new Set (data.map(agent=>agent.agent_id))];
-  let x = uniqueAgents.map(id =>{
+  let normalizedData = uniqueAgents.map(id =>{
     let properties = data.filter(d=>d.agent_id === id)
-  })
-
-  let	ids = data.map( t => t.agent_id)
-  let uniqueIds = [... new Set(ids)]
-
-  let normailizedData = uniqueIds.map( id =>{
-  let properties =  data.filter( d=> d.agent_id === id)
-  let filterProperties = properties.map(p=>{
-      return {key: p.id, sq_ft: p.sq_ft,price: p.price, beds:p.beds, baths:p.baths, city: p.city, zip:p.zip, street:p.street}
-  })
+    let filteredProperties = properties.map(p=>{
+      return {key:p.id, sq_ft: p.sq_ft,price: p.price, beds:p.beds, baths:p.baths, city: p.city, zip:p.zip, street:p.street}
+    })
     return {
-        name:  properties[0].first_name + ' ' + properties[0].last_name,
-        email:  properties[0].email,
-        properties: filterProperties
-
+      name: properties[0].first_name + ' ' + properties[0].last_name,
+      email: properties[0].email,
+      properties: filteredProperties
     }
   })
-return normailizedData
+  return normalizedData
+}
+
+//   let normailizedData = uniqueIds.map( id =>{
+//   let properties =  data.filter( d=> d.agent_id === id)
+//   let filterProperties = properties.map(p=>{
+//       return {key: p.id, sq_ft: p.sq_ft,price: p.price, beds:p.beds, baths:p.baths, city: p.city, zip:p.zip, street:p.street}
+//   })
+//     return {
+//         name:  properties[0].first_name + ' ' + properties[0].last_name,
+//         email:  properties[0].email,
+//         properties: filterProperties
+
+//     }
+//   })
+// return normailizedData
 
 
 //   let newObjectArray = data.map((a)=>{
@@ -129,6 +136,6 @@ return normailizedData
 //   return uniqueAgents;
 // }
 
-let newArray = unique()
+let newArray = unique(apdata)
 
 console.log(newArray)
