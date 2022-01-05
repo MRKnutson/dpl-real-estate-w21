@@ -6,12 +6,14 @@ import Login from './pages/Login';
 import Layout from './components/Layout';
 import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
+import Available from './pages/Available';
 
 function App() {
   return (
     <Routes>
       <Route element ={<Layout />}>
         <Route path = "/" element = {<Home />} />
+        <Route path = "/available" element = {<Available />} />
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
         <Route element = {<RequireAuth />}>
