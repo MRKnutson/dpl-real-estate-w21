@@ -35,8 +35,9 @@ const Layout = () => {
           <Navbar.Toggle aria-controls="response-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto" onSelect = {handleSelect}>
-              <Nav.Link eventKey = "/">Home</Nav.Link>
-              <Nav.Link eventKey = "/protected">Protected</Nav.Link>
+              {/* <Nav.Link eventKey = "/">Home</Nav.Link> */}
+              <Nav.Link eventKey = "/available">Available</Nav.Link>
+              {/* <Nav.Link eventKey = "/protected">Protected</Nav.Link> */}
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>
               {renderUILinks()}
