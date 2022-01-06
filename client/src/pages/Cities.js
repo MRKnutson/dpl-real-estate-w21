@@ -5,11 +5,11 @@ import { Container } from 'react-bootstrap';
 import PropertyCard from '../components/PropertyCard';
 const { Option } = Select;
 
-const dummyCityProperties = [
-  {sq_ft: 1234, beds: 3, baths: 2, price:456123},
-  {sq_ft: 144, beds: 4, baths: 2, price:45613},
-  {sq_ft: 234, beds: 5, baths: 2, price:456121233}
-]
+// const dummyCityProperties = [
+//   {sq_ft: 1234, beds: 3, baths: 2, price:456123},
+//   {sq_ft: 144, beds: 4, baths: 2, price:45613},
+//   {sq_ft: 234, beds: 5, baths: 2, price:456121233}
+// ]
 
 const Cities = () => {
   const [cities, setCities]= useState(null)
@@ -28,19 +28,21 @@ const Cities = () => {
       let res = await axios.get(`/api/cities`)
       setCities(res.data)
     } catch (err) {
-      setCities(['SLC', 'Draper', 'Provo'])
+      // setCities(['SLC', 'Draper', 'Provo'])
+      alert('error getting cities')
     }
   }
 
   const handleChange = async (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
     // api call to get city data
     try {
-      let response = await axios.get(`/api/cities/${value.toLowerCase()}`)
+      let response = await axios.get(`/api/cities/${value}`)
       setCity(value)
       setCityProperties(response.data)
     } catch (err) {
-      setCityProperties(dummyCityProperties)
+      // setCityProperties(dummyCityProperties)
+      alert('in handle change')
     }
   }
 
@@ -74,7 +76,7 @@ const Cities = () => {
           <Row>
           {cityProperties.map(c=>{
             return(
-              <Col sm = {24} md = {12} lg = {8} >
+              <Col key={c.property_id} sm = {24} md = {12} lg = {8} >
                 <PropertyCard {...c} />
               </Col>
             )
