@@ -17,9 +17,9 @@ const Cities = () => {
   const [cityProperties, setCityProperties]=useState([])
 
   useEffect(()=>{
-    setTimeout(()=>{
+    // setTimeout(()=>{
       getCities()
-    },2000)
+    // },2000)
     // getCities()
   },[])
 
@@ -72,7 +72,7 @@ const Cities = () => {
     } else {
       return (
         <div>
-          <p>{city} selected</p>
+          {/* <p>{city} selected</p> */}
           <Row>
           {cityProperties.map(c=>{
             return(
