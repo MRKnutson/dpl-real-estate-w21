@@ -8,6 +8,7 @@ import Protected from './pages/Protected';
 import RequireAuth from './components/RequireAuth';
 import Available from './pages/Available';
 import Cities from './pages/Cities';
+import FindHomes from './pages/FindHomes';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path = "/" element = {<Home />} />
         <Route path = "/available" element = {<Available />} />
         <Route path = "/cities" element = {<Cities />} />
+        <Route path = "/find_homes" element = {<FindHomes />} />
         <Route path = "/register" element = {<Register />} />
         <Route path = "/login" element = {<Login />} />
         <Route element = {<RequireAuth />}>

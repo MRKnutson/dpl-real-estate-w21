@@ -38,6 +38,7 @@ const Layout = () => {
               {/* <Nav.Link eventKey = "/">Home</Nav.Link> */}
               <Nav.Link eventKey = "/available">Available</Nav.Link>
               <Nav.Link eventKey = "/cities">Cities</Nav.Link>
+              <Nav.Link eventKey = "/find_homes">Find Homes</Nav.Link>
               {/* <Nav.Link eventKey = "/protected">Protected</Nav.Link> */}
             </Nav>
             <Nav className="justify-content-end" onSelect = {handleSelect}>
