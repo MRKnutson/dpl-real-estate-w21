@@ -14,6 +14,8 @@ const { Option } = Select;
 const Cities = () => {
   const [cities, setCities]= useState(null)
   const [city, setCity]=useState(null)
+  const [currentPage, setCurrentPage]=useState(1)
+  const [totalPages, setTotalPages]=useState(0)
   const [cityProperties, setCityProperties]=useState([])
 
   useEffect(()=>{
@@ -39,7 +41,9 @@ const Cities = () => {
     try {
       let response = await axios.get(`/api/cities/${value}`)
       setCity(value)
-      setCityProperties(response.data)
+      // console.log(response.data)
+      setCityProperties(response.data.properties)
+      setTotalPages(response.data.total_pages)
     } catch (err) {
       // setCityProperties(dummyCityProperties)
       alert('in handle change')
@@ -64,6 +68,32 @@ const Cities = () => {
     }
   }
 
+  const pageClicked = async (page) => {
+    setCurrentPage(page)
+    let response = await axios.get(`/api/cities/${city}?page=${page}`)
+    setCityProperties(response.data.properties)
+  }
+
+  const getStyle = (page) => {
+    let defaultStyle = {
+      fontSize: '20px',
+      marginRight: '15px',
+      cursor: 'pointer'
+    }
+    if (page === currentPage){
+      defaultStyle.borderBottom = "1px solid red"
+      defaultStyle.color = "red"
+    }
+    return defaultStyle
+  }
+  const renderPagination = () => {
+    const pages = []
+    for(let i = 1; i <=totalPages; i++){
+      pages.push(<span key = {i} onClick={()=>pageClicked(i)}style = {getStyle(i)}>{i}</span>)
+    }
+    return pages
+  };
+
   const renderCity = ()=>{
     if(!cityProperties){
       return(
@@ -72,6 +102,8 @@ const Cities = () => {
     } else {
       return (
         <div>
+          <h4>Pagination Demo current page: {currentPage}</h4>
+          {renderPagination()}
           {/* <p>{city} selected</p> */}
           <Row>
           {cityProperties.map(c=>{
